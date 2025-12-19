@@ -144,6 +144,7 @@
             color: var(--light);
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
         }
 
         /* Hero Section */
@@ -424,6 +425,8 @@
             padding: 2rem;
         }
 
+
+
         .section {
             margin-bottom: 6rem;
             scroll-margin-top: 100px;
@@ -610,6 +613,28 @@
             display: flex;
             flex-direction: column;
             cursor: pointer;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+
+        .project-image.fallback {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
         }
 
         .project-header {
@@ -665,13 +690,15 @@
             color: var(--light-gray);
             margin-bottom: 1.5rem;
             flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .tech-tag {
@@ -682,6 +709,17 @@
             color: var(--accent);
             font-size: 0.75rem;
             font-weight: 500;
+        }
+
+        .view-details {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            cursor: pointer;
         }
 
         /* Contact */
@@ -816,7 +854,7 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem 1rem;
             border-top: 1px solid var(--border);
             color: var(--gray);
             font-size: 0.9rem;
@@ -885,6 +923,10 @@
             background: var(--card-bg);
             border-radius: 1.5rem 1.5rem 0 0;
             z-index: 1;
+            backdrop-filter: none;
+            /* Remove blur effect */
+            background: var(--dark);
+            /* Solid dark background */
         }
 
         .modal-title {
@@ -998,22 +1040,23 @@
 
             .nav-links {
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: 0;
                 width: 100%;
-                background: var(--dark);
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.95);
                 flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid var(--border);
-                transform: translateY(-100%);
+                padding: 6rem 2rem 2rem;
+                gap: 2rem;
+                transform: translateX(-100%);
                 opacity: 0;
                 transition: var(--transition);
                 z-index: 999;
+                backdrop-filter: blur(10px);
             }
 
             .nav-links.active {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
             }
 
@@ -1146,6 +1189,14 @@
                 top: 15%;
                 left: -5%;
             }
+
+            .project-image {
+                height: 180px;
+            }
+
+            .project-content {
+                padding: 1.25rem;
+            }
         }
     </style>
 </head>
@@ -1192,9 +1243,9 @@
                     <a href="#contact" class="btn btn-primary">
                         <i class="fas fa-paper-plane"></i> Contact Me
                     </a>
-                    <a href="#projects" class="btn btn-secondary">
+                    <!-- <a href="#projects" class="btn btn-secondary">
                         <i class="fas fa-code-branch"></i> View Projects
-                    </a>
+                    </a> -->
                 </div>
                 <div class="experience-badge">
                     <div class="exp-icon">
@@ -1500,173 +1551,188 @@
                 <p class="section-subtitle">Highlighted deployments and implementations</p>
             </div>
             <div class="projects-grid">
-                <!-- Astoria Company -->
+                <!-- Astoria -->
                 <div class="card project-card" data-project="astoria">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-building"></i>
+                    <img src="images/SkyAuthix.png" alt="Astoria Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fas
+                        fa-cloud\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">Astoria</h3>
+                        <p class="project-description">
+                            Enterprise Kubernetes Microservices Platform on AWS EKS
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS EKS</span>
+                            <span class="tech-tag">Cloudflare</span>
+                            <span class="tech-tag">AWS WAF</span>
+                            <span class="tech-tag">RDS</span>
                         </div>
-                    </div>
-                    <h3 class="project-title">Astoria Company Web Application Deployment on AWS with EKS</h3>
-                    <p class="project-description">
-                        Deployed a scalable 3-tier application on AWS using EKS with ArgoCD. Configured auto-scaling,
-                        load balancing, and secured the application with IAM and VPC.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">AWS EKS</span>
-                        <span class="tech-tag">ArgoCD</span>
-                        <span class="tech-tag">Prometheus</span>
-                        <span class="tech-tag">Grafana</span>
-                        <span class="tech-tag">IAM</span>
-                        <span class="tech-tag">VPC</span>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </div>
                     </div>
                 </div>
 
-                <!-- PORTALI Django -->
+                <!-- Portali -->
                 <div class="card project-card" data-project="portali">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fab fa-python"></i>
+                    <img src="images/portali.png" alt="Portali Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fas
+                        fa-layer-group\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">Portali</h3>
+                        <p class="project-description">
+                            Scalable Microservices Platform on AWS ECS with GitLab CI/CD
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS ECS</span>
+                            <span class="tech-tag">GitLab CI/CD</span>
+                            <span class="tech-tag">Fargate</span>
+                            <span class="tech-tag">Route 53</span>
                         </div>
-                    </div>
-                    <h3 class="project-title">PORTALI Django Deployment on AWS ECS</h3>
-                    <p class="project-description">
-                        Automated AWS infrastructure with Terraform and deployed a containerized Django app on ECS using
-                        GitLab CI/CD. Implemented monitoring with Prometheus and Grafana.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">AWS ECS</span>
-                        <span class="tech-tag">Terraform</span>
-                        <span class="tech-tag">GitLab CI/CD</span>
-                        <span class="tech-tag">Django</span>
-                        <span class="tech-tag">Docker</span>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </div>
                     </div>
                 </div>
 
-                <!-- CIMAHub -->
+                <!-- CimaHub -->
                 <div class="card project-card" data-project="cimahub">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fa-brands fa-aws"></i>
+                    <img src="images/cimahub.png" alt="CimaHub Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fas
+                        fa-shield-alt\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">CimaHub</h3>
+                        <p class="project-description">
+                            Secure Containerized Application on AWS with CI CD
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                            <span class="tech-tag">VPC</span>
+                            <span class="tech-tag">Cloudflare</span>
                         </div>
-                    </div>
-                    <h3 class="project-title">CIMAHub Deployment on AWS with EKS</h3>
-                    <p class="project-description">
-                        Deployed and managed a Python backend application on AWS EKS with auto-scaling and load
-                        balancing. Implemented IAM and VPC for secure access.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">AWS EKS</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Auto-scaling</span>
-                        <span class="tech-tag">Load Balancing</span>
-                        <span class="tech-tag">Prometheus</span>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </div>
                     </div>
                 </div>
 
-                <!-- Total Scope -->
-                <div class="card project-card" data-project="total-scope">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-microscope"></i>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Total Scope Deployment</h3>
-                    <p class="project-description">
-                        Built fully automated CI/CD pipeline for microservices applications using GitHub Actions and
-                        Jenkins. Integrated testing, security scans, and automated deployments.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">GitHub Actions</span>
-                        <span class="tech-tag">Jenkins</span>
-                        <span class="tech-tag">Microservices</span>
-                        <span class="tech-tag">CI/CD</span>
-                        <span class="tech-tag">Security Scans</span>
-                    </div>
-                </div>
-
-                <!-- Home Site -->
-                <div class="card project-card" data-project="home-site">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                    </div>
-                    <h3 class="project-title">Home Site Blue/Green Deployment on AWS EC2</h3>
-                    <p class="project-description">
-                        Implemented zero-downtime deployment strategies using Blue/Green releases with Load Balancer,
-                        improving release confidence and reducing production risks.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">AWS EC2</span>
-                        <span class="tech-tag">Blue/Green</span>
-                        <span class="tech-tag">Load Balancer</span>
-                        <span class="tech-tag">Zero-downtime</span>
-                    </div>
-                </div>
-
-                <!-- SuccourAI -->
+                <!-- Succor AI -->
                 <div class="card project-card" data-project="succourai">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-brain"></i>
+                    <img src="images/SuccorAI.png" alt="Succor AI Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fas
+                        fa-robot\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">Succor AI</h3>
+                        <p class="project-description">
+                            Secure Cloud Native Web Platform with Automated CI/CD on AWS
+
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS WAF</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">RDS</span>
+                            <span class="tech-tag">Secrets Manager</span>
+                        </div>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
                         </div>
                     </div>
-                    <h3 class="project-title">SuccourAI Serverless Deployment</h3>
-                    <p class="project-description">
-                        Deployed serverless microservices on AWS Lambda. Implemented API Gateway, PostgreSQL, and S3 for
-                        a cost-efficient and scalable solution.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">AWS Lambda</span>
-                        <span class="tech-tag">API Gateway</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">S3</span>
-                        <span class="tech-tag">Serverless</span>
+                </div>
+
+                <!-- Wateen -->
+                <div class="card project-card" data-project="wateen">
+                    <img src="images/wateen.png" alt="Wateen Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fab
+                        fa-google\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title" Wateen </h3>
+                            <p class="project-description">
+                                GitOps-Based Kubernetes Delivery Platform on Google Kubernetes Engine
+
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">GKE</span>
+                                <span class="tech-tag">Argo CD</span>
+                                <span class="tech-tag">GitOps</span>
+                                <span class="tech-tag">Helm</span>
+                            </div>
+                            <div class="view-details">
+                                <i class="fas fa-arrow-right"></i> View Details
+                            </div>
+                    </div>
+                </div>
+
+                <!-- JigFast -->
+                <div class="card project-card" data-project="jigfast">
+                    <img src="images/JigFast.png" alt="JigFast Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fab
+                        fa-microsoft\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">JigFast</h3>
+                        <p class="project-description">
+                            CI CD Enabled Azure Application Platform with Secure Networking
+
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Azure</span>
+                            <span class="tech-tag">GitLab</span>
+                            <span class="tech-tag">Jenkins</span>
+                            <span class="tech-tag">VNet</span>
+                        </div>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </div>
                     </div>
                 </div>
 
                 <!-- Webgas on GKE -->
                 <div class="card project-card" data-project="webgas">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fab fa-google"></i>
+                    <img src="images/SkyAuthix.png" alt="Webgas Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fab
+                        fa-laravel\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">Webgas on GKE</h3>
+                        <p class="project-description">
+                            Laravel app on GKE with Cloud SQL & autoscaling, implementing GitOps with ArgoCD.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GKE</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Cloud SQL</span>
+                            <span class="tech-tag">ArgoCD</span>
                         </div>
-                    </div>
-                    <h3 class="project-title">Webgas on GKE</h3>
-                    <p class="project-description">
-                        Deployed Laravel app on GKE with Cloud SQL & autoscaling, optimizing costs. Implemented GitOps
-                        using ArgoCD to manage Kubernetes deployments.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">GKE</span>
-                        <span class="tech-tag">Laravel</span>
-                        <span class="tech-tag">Cloud SQL</span>
-                        <span class="tech-tag">ArgoCD</span>
-                        <span class="tech-tag">GitOps</span>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
+                        </div>
                     </div>
                 </div>
 
-                <!-- Drupal Automation -->
-                <div class="card project-card" data-project="drupal">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fab fa-drupal"></i>
+                <div class="card project-card" data-project="skyauthix">
+                    <img src="images/SkyAuthix.png" alt="SkyAuthix Project" class="project-image"
+                        onerror="this.onerror=null; this.classList.add('fallback'); this.innerHTML='<i class=\" fas
+                        fa-lock\"></i>
+                    <div class="project-content">
+                        <h3 class="project-title">SkyAuthix</h3>
+                        <p class="project-description">
+                            Secure Cloud-Native Web Platform with Firebase, Cloudflare & GCP
+
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GCP</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Cloudflare</span>
+                            <span class="tech-tag">Compute Engine</span>
+                        </div>
+                        <div class="view-details">
+                            <i class="fas fa-arrow-right"></i> View Details
                         </div>
                     </div>
-                    <h3 class="project-title">Drupal Automation</h3>
-                    <p class="project-description">
-                        Automated infrastructure provisioning with Terraform & Ansible on private networks for Drupal
-                        deployments.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Terraform</span>
-                        <span class="tech-tag">Ansible</span>
-                        <span class="tech-tag">Drupal</span>
-                        <span class="tech-tag">Automation</span>
-                    </div>
                 </div>
+
             </div>
+
+
         </section>
 
         <!-- Certifications Section -->
@@ -1761,9 +1827,6 @@
                 <a href="https://linkedin.com/in/izharyousaf" class="social-link" target="_blank">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <!-- <a href="https://twitter.com/izharyousaf" class="social-link" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a> -->
             </div>
         </section>
     </div>
@@ -1793,16 +1856,25 @@
     </div>
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle - FIXED
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         const navItems = document.querySelectorAll('.nav-link');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             navLinks.classList.toggle('active');
             mobileMenuBtn.innerHTML = navLinks.classList.contains('active')
                 ? '<i class="fas fa-times"></i>'
                 : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
         });
 
         // Close mobile menu when clicking a link
@@ -1882,127 +1954,157 @@
         // Project data
         const projects = {
             'astoria': {
-                title: 'Astoria Company Web Application Deployment on AWS with EKS',
-                description: 'A scalable 3-tier application deployment on AWS EKS with comprehensive monitoring and security.',
-                longDescription: 'Deployed a scalable 3-tier application on AWS using EKS with ArgoCD for GitOps. Configured auto-scaling, load balancing, and secured the application with IAM and VPC. Configured end-to-end monitoring and logging with Prometheus and Grafana. Set up custom dashboards and alerting rules to improve incident response time.',
-                techStack: ['AWS EKS', 'ArgoCD', 'Prometheus', 'Grafana', 'IAM', 'VPC', 'Auto-scaling', 'Load Balancing', 'Kubernetes', 'AWS'],
+                title: 'Enterprise Kubernetes Microservices Platform on AWS EKS',
+                description: '',
+                longDescription: 'Cloudvanta is a secure and scalable Kubernetes-based microservices platform deployed on Amazon EKS. The architecture uses Cloudflare, CloudFront, AWS WAF, and Shield for layered edge protection, with ALB and Kubernetes Ingress managing internal traffic routing. Container images are stored in Amazon ECR, while backend services integrate with highly available RDS, ElastiCache, and AWS Secrets Manager. Centralized logging, monitoring, and auditing are enabled through CloudWatch, CloudTrail, and SNS, ensuring operational visibility and compliance readiness.',
+                techStack: ['AWS EKS', 'Kubernetes', 'Cloudflare', 'AWS WAF', 'CloudFront', 'ALB', 'ECR', 'RDS', 'ElastiCache', 'Secrets Manager', 'CloudWatch', 'CloudTrail', 'SNS'],
                 features: [
-                    '3-tier architecture deployment on AWS EKS',
-                    'GitOps implementation with ArgoCD',
-                    'Auto-scaling for both pods and nodes',
-                    'Comprehensive monitoring with Prometheus and Grafana',
-                    'Custom dashboards for application metrics',
-                    'Alerting rules for incident response',
-                    'Secure access with IAM policies and VPC configuration'
+                    'Layered edge protection with Cloudflare, AWS WAF, and Shield',
+                    'Kubernetes Ingress for internal traffic routing',
+                    'Container image management with Amazon ECR',
+                    'Highly available backend services with RDS and ElastiCache',
+                    'Secure secrets management with AWS Secrets Manager',
+                    'Centralized logging and monitoring with CloudWatch',
+                    'Compliance auditing with CloudTrail',
+                    'Automated alerting with SNS'
                 ],
                 achievements: [
-                    'Improved application scalability and performance',
-                    'Reduced deployment time with GitOps approach',
-                    'Enhanced monitoring and incident response capabilities',
-                    'Ensured high availability with auto-scaling and load balancing'
+                    'Enhanced security with multi-layer edge protection',
+                    'Improved application performance and scalability',
+                    'Achieved operational visibility and compliance readiness',
+                    'Reduced operational overhead with managed services'
                 ]
             },
             'portali': {
-                title: 'PORTALI Django Deployment on AWS ECS',
-                description: 'Containerized Django application deployment on AWS ECS with automated infrastructure provisioning.',
-                longDescription: 'Automated AWS infrastructure with Terraform and deployed a containerized Django app on ECS using GitLab CI/CD. Implemented Prometheus and Grafana dashboards for monitoring and optimized costs with auto-scaling and efficient resource utilization.',
-                techStack: ['AWS ECS', 'Terraform', 'GitLab CI/CD', 'Django', 'Docker', 'Prometheus', 'Grafana', 'Auto-scaling'],
+                title: 'Scalable Microservices Platform on AWS ECS with GitLab CI/CD',
+                description: 'Nexora is a cloud-native microservices platform built on AWS ECS with Fargate.',
+                longDescription: 'Nexora is a cloud-native microservices platform built on AWS using Amazon ECS with Fargate for fully managed container orchestration. The architecture integrates GitLab CI/CD with Amazon ECR to automate image builds and deployments, while Route 53, ACM, and an Application Load Balancer provide secure, highly available traffic routing. Independent frontend, identity, and storage services run across multiple availability zones, ensuring scalability, fault tolerance, and seamless service isolation.',
+                techStack: ['AWS ECS', 'Fargate', 'GitLab CI/CD', 'Amazon ECR', 'Route 53', 'ACM', 'ALB', 'Microservices', 'Multi-AZ'],
                 features: [
-                    'Infrastructure as Code with Terraform',
-                    'CI/CD pipeline with GitLab CI/CD',
-                    'Containerized Django application',
-                    'Monitoring with Prometheus and Grafana',
-                    'Cost optimization with auto-scaling',
-                    'Efficient resource utilization'
+                    'Fully managed container orchestration with ECS Fargate',
+                    'Automated CI/CD pipeline with GitLab and ECR',
+                    'Secure domain management with Route 53 and ACM',
+                    'Highly available traffic routing with Application Load Balancer',
+                    'Independent service isolation across availability zones',
+                    'Scalable frontend, identity, and storage services',
+                    'Fault-tolerant architecture design'
                 ],
                 achievements: [
-                    'Automated infrastructure provisioning',
-                    'Reduced deployment time with CI/CD',
-                    'Optimized cloud costs with auto-scaling',
-                    'Improved application monitoring capabilities'
+                    'Reduced operational complexity with managed services',
+                    'Achieved high availability across multiple AZs',
+                    'Automated deployment processes',
+                    'Improved service isolation and scalability'
                 ]
             },
             'cimahub': {
-                title: 'CIMAHub Deployment on AWS with EKS',
-                description: 'Python backend application deployment on AWS EKS with comprehensive security and monitoring.',
-                longDescription: 'Deployed and managed a Python backend application on AWS EKS with auto-scaling and load balancing. Implemented IAM and VPC for secure access, and integrated Prometheus with Grafana dashboards for monitoring, logging, and automated alerting to enhance incident response.',
-                techStack: ['AWS EKS', 'Python', 'Auto-scaling', 'Load Balancing', 'IAM', 'VPC', 'Prometheus', 'Grafana'],
+                title: 'Secure Containerized Application on AWS with CI/CD',
+                description: 'Aethrix is a container-based web application deployed on AWS with comprehensive security layers.',
+                longDescription: 'Aethrix is a container based web application deployed on AWS within a structured VPC layout. User traffic is protected at the edge using Cloudflare and a web application firewall before reaching the application layer. Frontend and backend services run on Docker with NGINX, while container images are built and pushed through GitHub Actions to Amazon ECR. The platform integrates managed databases, secrets management, storage, and centralized monitoring to support secure and reliable deployments.',
+                techStack: ['AWS', 'Docker', 'NGINX', 'GitHub Actions', 'Amazon ECR', 'Cloudflare', 'WAF', 'VPC', 'RDS', 'Secrets Manager', 'S3', 'CloudWatch'],
                 features: [
-                    'Python backend application on EKS',
-                    'Horizontal pod auto-scaling',
-                    'Load balancing for high availability',
-                    'Secure access with IAM and VPC',
-                    'Comprehensive monitoring with Prometheus',
-                    'Grafana dashboards for visualization',
-                    'Automated alerting system'
+                    'Structured VPC layout for network isolation',
+                    'Edge protection with Cloudflare and WAF',
+                    'Dockerized frontend and backend services',
+                    'NGINX for reverse proxy and load balancing',
+                    'Automated CI/CD with GitHub Actions and ECR',
+                    'Managed database services with RDS',
+                    'Secure secrets management',
+                    'Centralized monitoring with CloudWatch'
                 ],
                 achievements: [
-                    'Achieved high availability with load balancing',
-                    'Improved security with IAM and VPC configurations',
-                    'Enhanced monitoring and incident response',
-                    'Optimized performance with auto-scaling'
-                ]
-            },
-            'total-scope': {
-                title: 'Total Scope Deployment with GitHub Actions and Jenkins',
-                description: 'Fully automated CI/CD pipeline for microservices applications with comprehensive testing.',
-                longDescription: 'Built a fully automated CI/CD pipeline for microservices applications. Integrated testing, security scans, and automated deployments, reducing release cycles by 50%. Designed and implemented a backup and disaster recovery strategy. Automated RDS snapshots and cross-region replication to ensure business continuity.',
-                techStack: ['GitHub Actions', 'Jenkins', 'Microservices', 'CI/CD', 'Security Scans', 'RDS', 'Backup', 'Disaster Recovery'],
-                features: [
-                    'Fully automated CI/CD pipeline',
-                    'Integration testing and security scans',
-                    'Automated deployments',
-                    'Backup and disaster recovery strategy',
-                    'Automated RDS snapshots',
-                    'Cross-region replication',
-                    'Microservices architecture'
-                ],
-                achievements: [
-                    'Reduced release cycles by 50%',
-                    'Improved application quality with automated testing',
-                    'Enhanced security with automated scans',
-                    'Ensured business continuity with disaster recovery'
-                ]
-            },
-            'home-site': {
-                title: 'Home Site Blue/Green Deployment Strategies on AWS EC2',
-                description: 'Zero-downtime deployment implementation using Blue/Green strategy on AWS EC2.',
-                longDescription: 'Implemented zero-downtime deployment strategies using Blue/Green releases with Load Balancer, improved release confidence and reduced production risks. This approach allowed for seamless updates without service interruption.',
-                techStack: ['AWS EC2', 'Blue/Green', 'Load Balancer', 'Zero-downtime', 'Deployment Strategies'],
-                features: [
-                    'Blue/Green deployment strategy',
-                    'Zero-downtime updates',
-                    'Load balancer configuration',
-                    'Automated traffic switching',
-                    'Rollback capabilities',
-                    'Production risk reduction'
-                ],
-                achievements: [
-                    'Eliminated downtime during deployments',
-                    'Improved release confidence',
-                    'Reduced production risks',
-                    'Enabled quick rollback if needed'
+                    'Enhanced application security with edge protection',
+                    'Automated container builds and deployments',
+                    'Improved network isolation and segmentation',
+                    'Centralized monitoring and management'
                 ]
             },
             'succourai': {
-                title: 'SuccourAI Serverless Deployment with AWS Lambda & API Gateway',
-                description: 'Serverless microservices deployment on AWS Lambda for cost-efficient scalability.',
-                longDescription: 'Deployed serverless microservices on AWS Lambda. Implemented API Gateway, PostgreSQL, and S3 for a cost-efficient and scalable solution. This architecture provided automatic scaling and reduced operational overhead.',
-                techStack: ['AWS Lambda', 'API Gateway', 'PostgreSQL', 'S3', 'Serverless', 'Microservices'],
+                title: 'Secure Cloud Native Web Platform with Automated CI/CD on AWS',
+                description: 'Aeronex is a highly available cloud-native web application with comprehensive security.',
+                longDescription: 'Aeronex is a highly available and secure cloud-native web application architecture deployed on AWS. It leverages Cloudflare, AWS WAF, and Shield for edge security, Application Load Balancer for traffic distribution, and Dockerized frontend and backend services running in isolated public and private subnets. The platform integrates GitHub Actions with Amazon ECR to enable automated CI/CD pipelines, while RDS, Secrets Manager, and CloudWatch ensure reliable data management, secure configuration handling, and end-to-end observability.',
+                techStack: ['AWS', 'Cloudflare', 'AWS WAF', 'Shield', 'ALB', 'Docker', 'GitHub Actions', 'Amazon ECR', 'RDS', 'Secrets Manager', 'CloudWatch', 'VPC'],
                 features: [
-                    'Serverless architecture with AWS Lambda',
-                    'API Gateway for request management',
-                    'PostgreSQL database integration',
-                    'S3 for storage',
-                    'Automatic scaling',
-                    'Cost-efficient solution',
-                    'Reduced operational overhead'
+                    'Multi-layer edge security with Cloudflare, AWS WAF, and Shield',
+                    'Highly available traffic distribution with Application Load Balancer',
+                    'Dockerized services in isolated subnets',
+                    'Automated CI/CD pipelines with GitHub Actions and ECR',
+                    'Managed database with RDS',
+                    'Secure configuration with Secrets Manager',
+                    'End-to-end observability with CloudWatch',
+                    'Network isolation with VPC'
                 ],
                 achievements: [
-                    'Achieved automatic scaling',
-                    'Reduced infrastructure costs',
-                    'Minimized operational overhead',
-                    'Improved application scalability'
+                    'Achieved high availability and fault tolerance',
+                    'Enhanced security with defense-in-depth approach',
+                    'Automated deployment processes',
+                    'Improved operational visibility'
+                ]
+            },
+            'wateen': {
+                title: 'GitOps-Based Kubernetes Delivery Platform on Google Kubernetes Engine',
+                description: 'Fluxera is a modern GitOps-driven deployment platform for microservices on GKE.',
+                longDescription: 'Fluxera is a modern GitOps-driven deployment platform designed for managing microservices on Google Kubernetes Engine. It uses CI pipelines to build Docker images and store artifacts, while Argo CD continuously synchronizes Kubernetes manifests and Helm charts from Git repositories. Cloudflare and Traefik provide secure edge routing, and isolated DEV and QA environments ensure controlled, reliable application delivery with full automation and traceability.',
+                techStack: ['GKE', 'Kubernetes', 'Argo CD', 'GitOps', 'Helm', 'Cloudflare', 'Traefik', 'Docker', 'CI/CD', 'Microservices'],
+                features: [
+                    'GitOps-driven deployment with Argo CD',
+                    'Automated synchronization of Kubernetes manifests',
+                    'Helm chart management for deployments',
+                    'Secure edge routing with Cloudflare and Traefik',
+                    'Isolated DEV and QA environments',
+                    'CI pipelines for Docker image builds',
+                    'Artifact storage and management',
+                    'Full automation and traceability'
+                ],
+                achievements: [
+                    'Implemented modern GitOps practices',
+                    'Achieved controlled application delivery',
+                    'Enhanced deployment reliability',
+                    'Improved environment isolation'
+                ]
+            },
+            'jigfast': {
+                title: 'CI/CD Enabled Azure Application Platform with Secure Networking',
+                description: 'Corelith is a cloud application platform deployed on Azure with segmented networking.',
+                longDescription: 'Corelith is a cloud application platform deployed on Microsoft Azure using a segmented virtual network with public and private subnets. The system runs containerized frontend and backend services on Linux virtual machines, protected by network security groups and Cloudflare at the edge. A complete CI/CD pipeline using GitLab and Jenkins automates builds and deployments, while secure database access, bastion host connectivity, and centralized storage ensure controlled and reliable operations.',
+                techStack: ['Azure', 'VNet', 'NSG', 'Cloudflare', 'Docker', 'GitLab', 'Jenkins', 'CI/CD', 'Linux VMs', 'Bastion Host', 'Storage'],
+                features: [
+                    'Segmented virtual network with public/private subnets',
+                    'Containerized services on Linux virtual machines',
+                    'Network security with NSGs',
+                    'Edge protection with Cloudflare',
+                    'Complete CI/CD pipeline with GitLab and Jenkins',
+                    'Secure database access patterns',
+                    'Bastion host for secure connectivity',
+                    'Centralized storage solutions'
+                ],
+                achievements: [
+                    'Implemented secure network segmentation',
+                    'Automated build and deployment processes',
+                    'Enhanced security with controlled access',
+                    'Improved operational reliability'
+                ]
+            },
+            'skyauthix': {
+                title: 'Secure Cloud-Native Web Platform with Firebase, Cloudflare & GCP',
+                description: 'SkyAuthix is a cloud-native web application architecture built on Google Cloud Platform.',
+                longDescription: 'SkyAuthix is a cloud-native web application architecture built on Google Cloud Platform, designed for high availability, security, and scalability. It leverages Cloudflare for edge protection, Firebase Hosting and Authentication for frontend delivery and user management, and GCP Load Balancing with Compute Engine for backend services. The platform integrates Firestore and Cloud SQL for data persistence, Artifact Registry for CI/CD image management, and Cloud Monitoring for observability and performance tracking.',
+                techStack: ['GCP', 'Firebase', 'Cloudflare', 'Compute Engine', 'Firestore', 'Cloud SQL', 'Artifact Registry', 'Cloud Monitoring', 'Load Balancing', 'Firebase Hosting', 'Firebase Authentication'],
+                features: [
+                    'Edge protection with Cloudflare for security and performance',
+                    'Firebase Hosting for fast frontend delivery',
+                    'Firebase Authentication for secure user management',
+                    'GCP Load Balancing for high availability traffic distribution',
+                    'Compute Engine for scalable backend services',
+                    'Data persistence with Firestore and Cloud SQL',
+                    'CI/CD image management with Artifact Registry',
+                    'Comprehensive observability with Cloud Monitoring'
+                ],
+                achievements: [
+                    'Achieved high availability and scalability',
+                    'Enhanced security with multi-layer protection',
+                    'Improved user experience with fast frontend delivery',
+                    'Implemented comprehensive monitoring and observability',
+                    'Streamlined CI/CD processes with artifact management'
                 ]
             },
             'webgas': {
@@ -2025,32 +2127,16 @@
                     'Improved deployment reliability'
                 ]
             },
-            'drupal': {
-                title: 'Drupal Automation',
-                description: 'Automated infrastructure provisioning for Drupal deployments on private networks.',
-                longDescription: 'Automated infra provisioning with Terraform & Ansible on private networks for Drupal content management system deployments. This automation streamlined the deployment process and ensured consistency across environments.',
-                techStack: ['Terraform', 'Ansible', 'Drupal', 'Automation', 'Private Networks'],
-                features: [
-                    'Infrastructure as Code with Terraform',
-                    'Configuration management with Ansible',
-                    'Drupal CMS deployment',
-                    'Private network configuration',
-                    'Automated provisioning',
-                    'Consistent environment setup'
-                ],
-                achievements: [
-                    'Streamlined deployment process',
-                    'Ensured environment consistency',
-                    'Reduced manual configuration errors',
-                    'Improved deployment speed'
-                ]
-            }
+
         };
 
-        // Open modal when clicking on project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                const projectId = card.getAttribute('data-project');
+        // Open modal when clicking on project cards or view details
+        document.querySelectorAll('.project-card, .view-details').forEach(element => {
+            element.addEventListener('click', (e) => {
+                if (e.target.classList.contains('project-link')) return;
+
+                const projectCard = e.target.closest('.project-card');
+                const projectId = projectCard.getAttribute('data-project');
                 openProjectModal(projectId);
             });
         });
